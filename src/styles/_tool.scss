@@ -1,0 +1,23 @@
+@use 'sass:math' as math;
+
+@function vw($px, $base: 1920px) {
+  @return math.div($px, $base) * 100vw;
+}
+
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}

@@ -1,0 +1,45 @@
+@use 'root' as *;
+@use 'reboot' as *;
+@use 'tool' as *;
+
+body {
+  background-color: var(--primary-background);
+  color: var(--primary-text);
+  font-family: var(--font-din);
+}
+
+.article-info-details:has(+ .overview-block) {
+  @include laptop {
+    margin-bottom: 40px;
+  }
+}
+
+.overview-block:has(+ .full-viewport-media-block) {
+  @include laptop {
+    margin-bottom: 32px;
+  }
+}
+
+.full-viewport-media-block:has(+ .subheading-block) {
+  @include laptop {
+    margin-bottom: 40px;
+  }
+}
+
+.subheading-block:has(+ .media-block) {
+  @include laptop {
+    margin-bottom: 32px;
+  }
+}
+
+.media-block:has(+ .list-item-block) {
+  @include laptop {
+    margin-bottom: 16px;
+  }
+}
+
+.list-item-block:has(+ .media-block) {
+  @include laptop {
+    margin-bottom: 64px;
+  }
+}
