@@ -2,6 +2,7 @@ import '@styles/app.scss';
 
 import { Locale as LocaleType, routing } from '@i18n/routing';
 import MainLayout from '@modules/Layouts';
+import MainProviders from '@providers/index';
 import { extractMetadata } from '@utils/metadata';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
@@ -46,8 +47,13 @@ export default async function RootLayout({ children, params }: Props) {
 
       <body>
         <NextIntlClientProvider messages={messages}>
-          <MainLayout>{children}</MainLayout>
-          <SpeedInsights />
+          <MainProviders>
+            <MainLayout>
+              {children}
+
+              <SpeedInsights />
+            </MainLayout>
+          </MainProviders>
         </NextIntlClientProvider>
       </body>
     </html>
