@@ -1,6 +1,8 @@
 import '@styles/app.scss';
 
 import { Locale as LocaleType, routing } from '@i18n/routing';
+import MainLayout from '@modules/Layouts';
+import { extractMetadata } from '@utils/metadata';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -12,18 +14,16 @@ type Props = {
   params: Promise<{ locale: LocaleType }>;
 };
 
-export const generateMetadata = async (_: Props): Promise<Metadata> => {
-  return {
-    title: 'Home',
-    description: 'Home',
-    metadataBase: new URL('https://www.example.com'),
-    alternates: {
-      canonical: 'https://www.example.com',
-    },
-    openGraph: {
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { locale } = await params;
+
+  return extractMetadata({
+    baseMetadata: {
       title: 'Home',
+      description: 'Home',
     },
-  };
+    locale,
+  });
 };
 
 export default async function RootLayout({ children, params }: Props) {
@@ -46,7 +46,7 @@ export default async function RootLayout({ children, params }: Props) {
 
       <body>
         <NextIntlClientProvider messages={messages}>
-          <main>{children}</main>
+          <MainLayout>{children}</MainLayout>
           <SpeedInsights />
         </NextIntlClientProvider>
       </body>

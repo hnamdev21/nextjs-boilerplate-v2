@@ -26,11 +26,6 @@ export interface ExtractMetadataParams {
   imageUrl?: string;
 }
 
-/**
- * Extract and merge metadata from base settings and override data
- * @param params - Object containing baseMetadata, overrideMetadata, locale, and imageUrl
- * @returns Merged metadata object for Next.js
- */
 export const extractMetadata = (params: ExtractMetadataParams): Metadata => {
   const { baseMetadata, overrideMetadata, locale, imageUrl } = params;
 

@@ -1,15 +1,16 @@
 'use client';
 
 import {
-  ChakraProvider as Chakra,
+  ChakraProvider as CkProvider,
   createSystem,
   defaultBaseConfig,
   defineConfig,
 } from '@chakra-ui/react';
+import { Breakpoints } from '@constants/breakpoints';
 import type { ReactNode } from 'react';
 import React from 'react';
 
-interface ChakraProviderProps {
+interface Props {
   children: ReactNode;
 }
 
@@ -18,15 +19,14 @@ const customConfig = defineConfig({
   utilities: {},
   theme: {
     breakpoints: {
-      sm: '768px',
-      md: '1200px',
-      lg: '1440px',
+      sm: `${Breakpoints.MIN_TABLET}px`,
+      md: `${Breakpoints.MIN_LAPTOP}px`,
     },
   },
 });
 
 const optimizedSystem = createSystem(defaultBaseConfig, customConfig);
 
-export function ChakraProvider({ children }: ChakraProviderProps): React.ReactElement {
-  return <Chakra value={optimizedSystem}>{children}</Chakra>;
+export function ChakraProvider({ children }: Props): React.ReactElement {
+  return <CkProvider value={optimizedSystem}>{children}</CkProvider>;
 }

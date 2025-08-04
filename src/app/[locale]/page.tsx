@@ -1,19 +1,24 @@
 import { Locale } from '@i18n/routing';
+import HomePage from '@modules/Home';
+import { extractMetadata } from '@utils/metadata';
+import { Metadata } from 'next';
 
 interface Props {
   params: Promise<{ locale: Locale }>;
 }
 
-export const generateMetadata = async ({ params }: Props) => {
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { locale } = await params;
 
-  return {
-    title: 'Home',
-    description: 'Home',
+  return extractMetadata({
+    baseMetadata: {
+      title: 'Home',
+      description: 'Home',
+    },
     locale,
-  };
+  });
 };
 
 export default async function Page() {
-  return <div>Home</div>;
+  return <HomePage />;
 }

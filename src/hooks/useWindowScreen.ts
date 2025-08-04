@@ -1,16 +1,20 @@
 import { useMediaQuery } from '@chakra-ui/react';
+import { Breakpoints } from '@constants/breakpoints';
 
 const useWindowScreen = () => {
-  const [isTablet, isDesktop] = useMediaQuery(['(min-width: 768px)', '(min-width: 1200px)'], {
-    ssr: true,
-    fallback: [false, false],
-  });
+  const [isTablet, isLaptop] = useMediaQuery(
+    [`(min-width: ${Breakpoints.MIN_TABLET}px)`, `(min-width: ${Breakpoints.MIN_LAPTOP}px)`],
+    {
+      ssr: true,
+      fallback: [false, false],
+    }
+  );
 
-  const isMobile = !isTablet && !isDesktop;
+  const isMobile = !isTablet && !isLaptop;
 
   return {
     isTablet,
-    isDesktop,
+    isLaptop,
     isMobile,
   };
 };
