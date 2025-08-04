@@ -1,7 +1,18 @@
 @use 'sass:math' as math;
 
-@function vw($px, $base: 1920px) {
+@function dynamicOnWidth($px, $base: 1920px) {
   @return math.div($px, $base) * 100vw;
+}
+
+@function dynamicOnHeight($px, $base: 1080px) {
+  @return math.div($px, $base) * 100vh;
+}
+
+@function dynamicOnBoth($px, $base-width: 1920, $base-height: 1080) {
+  $dynamic-on-width: math.div($px, $base-width) * 100vw;
+  $dynamic-on-height: math.div($px, $base-height) * 100vh;
+
+  @return min($dynamic-on-width, $dynamic-on-height);
 }
 
 @mixin mobile {

@@ -1,142 +1,136 @@
+@use 'tool' as *;
+
 * {
   margin: 0;
   padding: 0;
-  border: 0;
+  box-sizing: border-box;
 }
 
-body,
+body {
+  line-height: 1.5;
+  font-family: sans-serif;
+  background: #fff;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+:focus {
+  outline: none;
+}
+
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  padding: 0;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  font-size: 100%;
-  font-weight: normal;
-  font-style: normal;
-  font-family: inherit;
-  line-height: inherit;
-  vertical-align: baseline;
-  outline: none;
-  background: transparent;
-  border: 0;
+h6 {
+  font: inherit;
+  font-weight: bold;
 }
 
-ol,
-ul {
-  list-style: none;
+blockquote,
+pre {
+  all: unset;
+  white-space: pre-wrap;
+}
+
+article,
+aside,
+footer,
+header,
+nav,
+section {
+  display: block;
 }
 
 html {
   box-sizing: border-box;
-}
+  font-size: dynamicOnWidth(10, 375);
 
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
+  @include tablet {
+    font-size: dynamicOnWidth(10, 768);
+  }
 
-[hidden] {
-  visibility: hidden;
-}
-
-html,
-body {
-  font-smoothing: antialiased !important;
-  -webkit-font-smoothing: antialiased !important;
-  scroll-behavior: unset !important;
-  overscroll-behavior-y: none !important;
-  min-height: -webkit-fill-available;
-  pointer-events: auto !important;
-
-  ::-webkit-scrollbar {
-    display: none;
+  @include laptop {
+    font-size: dynamicOnWidth(10, 1920);
   }
 }
 
-video,
-img {
-  max-width: 100%;
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
-img:is([loading='lazy']) {
-  background-repeat: no-repeat;
-  background-size: cover;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+a,
 button {
   cursor: pointer;
-  background: none;
-  border: none;
-  outline: none;
 
-  &:focus {
-    outline: none;
+  > * {
+    cursor: pointer;
   }
 }
