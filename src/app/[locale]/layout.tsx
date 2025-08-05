@@ -10,7 +10,7 @@ import type { Locale as LocaleType } from '@/i18n/routing';
 import { routing } from '@/i18n/routing';
 import MainLayout from '@/modules/Layouts';
 import MainProviders from '@/providers/index';
-import { extractMetadata } from '@/utils/metadata';
+import { extractMetadata } from '@/utils/metadata.util';
 
 type Props = {
   children: React.ReactNode;

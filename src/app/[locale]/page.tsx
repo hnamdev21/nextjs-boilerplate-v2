@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import type { Locale } from '@/i18n/routing';
 import HomePage from '@/modules/HomePage';
-import { extractMetadata } from '@/utils/metadata';
+import { extractMetadata } from '@/utils/metadata.util';
 
 interface Props {
   params: Promise<{ locale: Locale }>;

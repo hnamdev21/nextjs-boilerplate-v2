@@ -3,7 +3,7 @@
 import type { ReactNode } from 'react';
 import { createContext, use, useCallback, useLayoutEffect, useMemo, useRef } from 'react';
 
-import { createLogger } from '@/utils/logger';
+import { createLogger } from '@/utils/logger.util';
 
 type Data = {
   loadAsset: () => void;

@@ -1,7 +1,25 @@
+import withPWAInit from '@ducanh2912/next-pwa';
 import { NextConfig } from 'next';
-import createNextIntlPlugin from 'next-intl/plugin';
+import createBundleAnalyzerPlugin from '@next/bundle-analyzer';
+import createIntlPlugin from 'next-intl/plugin';
+import withPlugins from 'next-compose-plugins';
+import withSvgr from 'next-plugin-svgr';
 
 const isProduction = process.env.NEXT_PUBLIC_APP_ENV === 'production';
+
+const withBundleAnalyzer = createBundleAnalyzerPlugin({
+  enabled: process.env.NEXT_PUBLIC_ANALYZE === 'true',
+});
+const withNextIntl = createIntlPlugin();
+const withPwa = withPWAInit({
+  dest: 'public',
+  disable: !isProduction,
+  register: !isProduction,
+  workboxOptions: {
+    disableDevLogs: true,
+    cleanupOutdatedCaches: true,
+  },
+});
 
 const nextConfig: NextConfig = {
   output: 'standalone',
@@ -88,11 +106,24 @@ const nextConfig: NextConfig = {
   },
 
   experimental: {
-    optimizePackageImports: ['@chakra-ui/react', 'lodash'],
+    optimizePackageImports: ['@chakra-ui/react', 'lodash', '@emotion/react', '@emotion/styled'],
     scrollRestoration: true,
     serverActions: {
       bodySizeLimit: '2mb',
     },
+    gzipSize: true,
+    optimizeServerReact: true,
+    serverMinification: true,
+    optimizeCss: true,
+    cssChunking: true,
+    webpackMemoryOptimizations: true,
+  },
+  compiler: {
+    removeConsole: isProduction,
+    styledComponents: true,
+    styledJsx: true,
+    reactRemoveProperties: true,
+    emotion: true,
   },
 
   async headers() {
@@ -127,19 +158,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-const withNextIntl = createNextIntlPlugin();
-
-export default async () => {
-  if (isProduction) {
-    const { default: withPWA } = await import('@ducanh2912/next-pwa');
-
-    return withPWA({
-      dest: 'public',
-      workboxOptions: {
-        disableDevLogs: true,
-      },
-    })(nextConfig);
-  }
-
-  return withNextIntl(nextConfig);
-};
+export default withPlugins([withBundleAnalyzer, withNextIntl, withPwa, withSvgr], nextConfig);

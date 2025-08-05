@@ -5,7 +5,7 @@ import { createContext, use, useCallback, useEffect, useMemo, useRef } from 'rea
 
 import { useAsset } from '@/providers/asset.provider';
 import usePageStateStore, { PageState } from '@/stores/page-state.store';
-import { createLogger } from '@/utils/logger';
+import { createLogger } from '@/utils/logger.util';
 
 type Data = {
   subscribe: (key: string, handler: (pageState: PageState) => void) => void;

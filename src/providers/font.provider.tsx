@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { createContext, use, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { useAsset } from '@/providers/asset.provider';
-import { createLogger } from '@/utils/logger';
+import { createLogger } from '@/utils/logger.util';
 
 type Data = {
   subscribe: (key: string, handler: FontEventHandler) => void;
