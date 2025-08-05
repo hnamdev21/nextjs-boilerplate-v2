@@ -1,9 +1,9 @@
 'use client';
 
-import type { Signal } from '@preact/signals-react';
-import { useSignal } from '@preact/signals-react';
 import type { RefObject } from 'react';
 import { useLayoutEffect, useRef } from 'react';
+import type { Signal } from '@preact/signals-react';
+import { useSignal } from '@preact/signals-react';
 
 type Props = {
   ref: RefObject<DomLike>;

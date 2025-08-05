@@ -21,17 +21,17 @@
       }
     ],
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@types/*": ["./src/types/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@services/*": ["./src/services/*"],
-      "@i18n/*": ["./src/i18n/*"],
-      "@messages/*": ["./src/messages/*"],
-      "@providers/*": ["./src/providers/*"],
-      "@modules/*": ["./src/modules/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/constants/*": ["./src/constants/*"],
+      "@/services/*": ["./src/services/*"],
+      "@/i18n/*": ["./src/i18n/*"],
+      "@/messages/*": ["./src/messages/*"],
+      "@/providers/*": ["./src/providers/*"],
+      "@/modules/*": ["./src/modules/*"],
       "@/*": ["./src/*"]
     },
     "strictNullChecks": true

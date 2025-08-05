@@ -1,5 +1,5 @@
+import type { RefObject } from 'react';
 import { Grid, type GridProps } from '@chakra-ui/react/grid';
-import { RefObject } from 'react';
 
 type Props = GridProps & {
   ref?: RefObject<HTMLDivElement | null>;

@@ -1,6 +1,8 @@
-import { useAsset } from '@providers/asset.provider';
-import Image, { ImageProps } from 'next/image';
 import { useEffect } from 'react';
+import type { ImageProps } from 'next/image';
+import Image from 'next/image';
+
+import { useAsset } from '@/providers/asset.provider';
 
 type Props = ImageProps;
 

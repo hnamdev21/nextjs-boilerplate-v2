@@ -1,8 +1,9 @@
 'use client';
 
-import { createLogger } from '@utils/logger';
 import type { ReactNode } from 'react';
 import { createContext, use, useCallback, useEffect, useMemo, useRef } from 'react';
+
+import { createLogger } from '@/utils/logger';
 
 type Data = {
   subscribe: (key: string, handler: CursorEventHandler) => void;

@@ -1,5 +1,6 @@
 import { useMediaQuery } from '@chakra-ui/react';
-import { Breakpoints } from '@constants/breakpoints';
+
+import { Breakpoints } from '@/constants/breakpoints';
 
 const useWindowScreen = () => {
   const [isTablet, isLaptop] = useMediaQuery(

@@ -1,11 +1,12 @@
-import LenisScroller from '@components/animation/lenis';
-import { AssetProvider } from '@providers/asset.provider';
-import { ChakraProvider } from '@providers/chakra.provider';
-import { CursorProvider } from '@providers/cursor.provider';
-import { FontProvider } from '@providers/font.provider';
-import { PageStateProvider } from '@providers/page-state.provider';
-import { WindowSizeProvider } from '@providers/window-size.provider';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
+
+import LenisScroller from '@/components/animation/lenis';
+import { AssetProvider } from '@/providers/asset.provider';
+import { ChakraProvider } from '@/providers/chakra.provider';
+import { CursorProvider } from '@/providers/cursor.provider';
+import { FontProvider } from '@/providers/font.provider';
+import { PageStateProvider } from '@/providers/page-state.provider';
+import { WindowSizeProvider } from '@/providers/window-size.provider';
 
 const MainProviders = ({ children }: PropsWithChildren) => {
   return (

@@ -1,14 +1,16 @@
-import '@styles/app.scss';
+import '@/styles/app.scss';
 
-import { Locale as LocaleType, routing } from '@i18n/routing';
-import MainLayout from '@modules/Layouts';
-import MainProviders from '@providers/index';
-import { extractMetadata } from '@utils/metadata';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
+import type { Locale as LocaleType } from '@/i18n/routing';
+import { routing } from '@/i18n/routing';
+import MainLayout from '@/modules/Layouts';
+import MainProviders from '@/providers/index';
+import { extractMetadata } from '@/utils/metadata';
 
 type Props = {
   children: React.ReactNode;

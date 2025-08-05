@@ -1,14 +1,15 @@
 'use client';
 
+import type { ReactNode } from 'react';
+import React from 'react';
 import {
   ChakraProvider as CkProvider,
   createSystem,
   defaultBaseConfig,
   defineConfig,
 } from '@chakra-ui/react';
-import { Breakpoints } from '@constants/breakpoints';
-import type { ReactNode } from 'react';
-import React from 'react';
+
+import { Breakpoints } from '@/constants/breakpoints';
 
 interface Props {
   children: ReactNode;

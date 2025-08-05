@@ -5,6 +5,7 @@ import js from '@eslint/js';
 import prettierConfig from 'eslint-config-prettier';
 import eslintPluginImportX from 'eslint-plugin-import-x';
 import prettier from 'eslint-plugin-prettier';
+import react from '@eslint-react/eslint-plugin';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import unusedImports from 'eslint-plugin-unused-imports';
 import tseslint from 'typescript-eslint';
@@ -36,6 +37,7 @@ const config = tseslint.config(
   // Next.js / React
   ...compat.extends('plugin:@next/next/recommended'),
   ...compat.extends('plugin:react-hooks/recommended'),
+  react.configs['recommended-type-checked'],
 
   {
     languageOptions: {
@@ -77,8 +79,27 @@ const config = tseslint.config(
         'error',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
-      'simpleImportSort/imports': 'error',
+      'simpleImportSort/imports': [
+        'error',
+        {
+          groups: [
+            ['^.+\\.s?css$'],
+            ['^react', '^next', '^@?\\w'],
+            ['^@/'],
+            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+          ],
+        },
+      ],
       'simpleImportSort/exports': 'error',
+      '@typescript-eslint/consistent-type-imports': [
+        'warn',
+        { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
+      ],
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        { checksVoidReturn: { attributes: false } },
+      ],
 
       'no-return-assign': 'error',
       'no-console': 'off',
@@ -100,9 +121,6 @@ const config = tseslint.config(
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'import-x/no-unresolved': ['error', { ignore: ['@chakra-ui/react'] }],
-      // 'import-x/no-named-as-default-member': 'off',
-      // 'import-x/no-named-as-default': 'off',
-      // '@next/next/no-img-element': 'off',
     },
   },
 

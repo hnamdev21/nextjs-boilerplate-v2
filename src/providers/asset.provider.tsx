@@ -1,8 +1,9 @@
 'use client';
 
-import { createLogger } from '@utils/logger';
 import type { ReactNode } from 'react';
 import { createContext, use, useCallback, useLayoutEffect, useMemo, useRef } from 'react';
+
+import { createLogger } from '@/utils/logger';
 
 type Data = {
   loadAsset: () => void;

@@ -1,5 +1,6 @@
-import { Locale } from '@i18n/routing';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+
+import type { Locale } from '@/i18n/routing';
 
 export interface BaseMetadata {
   title?: string;

@@ -1,7 +1,8 @@
+import type { PropsWithChildren } from 'react';
 import { Box } from '@chakra-ui/react/box';
-import Footer from '@modules/Layouts/footer';
-import Header from '@modules/Layouts/header';
-import { PropsWithChildren } from 'react';
+
+import Footer from '@/modules/Layouts/footer';
+import Header from '@/modules/Layouts/header';
 
 const MainLayout = ({ children }: PropsWithChildren) => {
   return (

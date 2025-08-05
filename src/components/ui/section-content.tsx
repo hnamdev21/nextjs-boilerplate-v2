@@ -1,7 +1,8 @@
-import { BoxProps } from '@chakra-ui/react/box';
+import type { RefObject } from 'react';
+import type { BoxProps } from '@chakra-ui/react/box';
 import { Grid } from '@chakra-ui/react/grid';
-import { Container } from '@constants/vars';
-import { RefObject } from 'react';
+
+import { Container } from '@/constants/vars';
 
 type Props = BoxProps & {
   ref?: RefObject<HTMLDivElement | null>;

@@ -1,8 +1,9 @@
 'use client';
 
-import useWindowScreen from '@hooks/useWindowScreen';
 import type React from 'react';
 import { cloneElement } from 'react';
+
+import useWindowScreen from '@/hooks/useWindowScreen';
 
 interface Props {
   desktop: React.ReactElement;

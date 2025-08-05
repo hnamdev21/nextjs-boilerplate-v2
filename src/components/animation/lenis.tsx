@@ -1,9 +1,9 @@
 'use client';
 
-import { gsap } from 'gsap';
-import { type LenisRef, ReactLenis } from 'lenis/react';
 import type { PropsWithChildren } from 'react';
 import { useLayoutEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { type LenisRef, ReactLenis } from 'lenis/react';
 
 const LenisScroller = ({ children }: PropsWithChildren) => {
   const lenisRef = useRef<LenisRef | null>(null);

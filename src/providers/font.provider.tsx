@@ -1,9 +1,10 @@
 'use client';
 
-import { useAsset } from '@providers/asset.provider';
-import { createLogger } from '@utils/logger';
 import type { ReactNode } from 'react';
 import { createContext, use, useCallback, useEffect, useMemo, useRef } from 'react';
+
+import { useAsset } from '@/providers/asset.provider';
+import { createLogger } from '@/utils/logger';
 
 type Data = {
   subscribe: (key: string, handler: FontEventHandler) => void;
