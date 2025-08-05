@@ -18,7 +18,7 @@ const compat = new FlatCompat({
 
 const config = tseslint.config(
   {
-    ignores: ['.next', 'node_modules', './sanity.types.ts', '*.config.mjs', '*.config.js'],
+    ignores: ['.next', 'node_modules', '*.config.mjs', '*.config.js'],
   },
   {
     plugins: {

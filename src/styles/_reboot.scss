@@ -96,12 +96,24 @@ html {
   box-sizing: border-box;
   font-size: dynamicOnWidth(10, 375);
 
+  --container-padding-x: 1.6rem;
+  --grid-gap: 1.6rem;
+  --grid-columns: 6;
+
   @include tablet {
     font-size: dynamicOnWidth(10, 768);
+
+    --container-padding-x: 2.4rem;
+    --grid-gap: 2.4rem;
+    --grid-columns: 8;
   }
 
   @include laptop {
     font-size: dynamicOnWidth(10, 1920);
+
+    --container-padding-x: 3.2rem;
+    --grid-gap: 3.2rem;
+    --grid-columns: 12;
   }
 }
 

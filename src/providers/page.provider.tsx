@@ -8,9 +8,16 @@ import usePageStateStore, { PageState } from '@/stores/page-state.store';
 
 type Data = {
   registerOnPageChange: (key: string, handler: (pageState: PageState) => void) => void;
-  registerOnFontAsset: (key: string, handler: (isLoaded: boolean) => void) => void;
   unregisterOnPageChange: (key: string) => void;
+
+  registerOnFontAsset: (key: string, handler: (isLoaded: boolean) => void) => void;
   unregisterOnFontAsset: (key: string) => void;
+
+  loadAsset: () => void;
+  completeAsset: () => void;
+
+  registerOnAssetLoad: (key: string, handler: (isLoaded: boolean) => void) => void;
+  unregisterOnAssetLoad: (key: string) => void;
 };
 
 const Context = createContext<Data | undefined>(undefined);
@@ -25,6 +32,10 @@ export const PageProvider: React.FC<Props> = ({ children }) => {
   const pageChangeHandlers = useRef<{ [key: string]: (pageState: PageState) => void }>({});
   const fontAssetHandlers = useRef<{ [key: string]: (isLoaded: boolean) => void }>({});
 
+  const assetLoadHandlers = useRef<{ [key: string]: (isLoaded: boolean) => void }>({});
+  const totalAssets = useRef(0);
+  const loadedAssets = useRef(0);
+
   const registerOnPageChange = useCallback(
     (key: string, handler: (pageState: PageState) => void) => {
       if (!pageChangeHandlers.current[key]) {
@@ -35,6 +46,9 @@ export const PageProvider: React.FC<Props> = ({ children }) => {
     },
     []
   );
+  const unregisterOnPageChange = useCallback((key: string) => {
+    delete pageChangeHandlers.current[key];
+  }, []);
 
   const registerOnFontAsset = useCallback((key: string, handler: (isLoaded: boolean) => void) => {
     if (!fontAssetHandlers.current[key]) {
@@ -43,13 +57,36 @@ export const PageProvider: React.FC<Props> = ({ children }) => {
       logger.warn(`Handler already registered for key: ${key}`);
     }
   }, []);
-
-  const unregisterOnPageChange = useCallback((key: string) => {
-    delete pageChangeHandlers.current[key];
-  }, []);
-
   const unregisterOnFontAsset = useCallback((key: string) => {
     delete fontAssetHandlers.current[key];
+  }, []);
+
+  const loadAsset = useCallback(() => {
+    totalAssets.current++;
+  }, []);
+  const completeAsset = useCallback(() => {
+    loadedAssets.current++;
+
+    if (loadedAssets.current === totalAssets.current) {
+      Object.values(assetLoadHandlers.current).forEach((handler) => {
+        handler(true);
+      });
+    }
+
+    if (loadedAssets.current === totalAssets.current) {
+      usePageStateStore.getState().actions.setPageState(PageState.READY);
+    }
+  }, []);
+
+  const registerOnAssetLoad = useCallback((key: string, handler: (isLoaded: boolean) => void) => {
+    if (!assetLoadHandlers.current[key]) {
+      assetLoadHandlers.current[key] = handler;
+    } else {
+      logger.warn(`Handler already registered for key: ${key}`);
+    }
+  }, []);
+  const unregisterOnAssetLoad = useCallback((key: string) => {
+    delete assetLoadHandlers.current[key];
   }, []);
 
   useEffect(() => {
@@ -63,8 +100,8 @@ export const PageProvider: React.FC<Props> = ({ children }) => {
       });
     });
 
-    const handleFontAsset = (isLoaded: boolean) => {
-      logger.info('handleFontAsset', {
+    const handleFontLoader = (isLoaded: boolean) => {
+      logger.info('handleFontLoader', {
         isLoaded,
       });
 
@@ -73,22 +110,25 @@ export const PageProvider: React.FC<Props> = ({ children }) => {
       });
     };
 
-    handleFontAsset(false);
+    loadAsset();
+    handleFontLoader(false);
 
     document.fonts.ready
-      .then(() => {
-        handleFontAsset(true);
-        usePageStateStore.getState().actions.setPageState(PageState.READY);
-      })
+      .then(() => handleFontLoader(true))
       .catch((error) => {
-        handleFontAsset(false);
-        usePageStateStore.getState().actions.setPageState(PageState.ERROR);
+        handleFontLoader(false);
         logger.error('Failed to load fonts', error);
+      })
+      .finally(() => {
+        completeAsset();
       });
 
     return () => {
       pageChangeHandlers.current = {};
       fontAssetHandlers.current = {};
+      assetLoadHandlers.current = {};
+      totalAssets.current = 0;
+      loadedAssets.current = 0;
       usePageStateStore.getState().actions.reset();
     };
   }, []);
@@ -99,6 +139,10 @@ export const PageProvider: React.FC<Props> = ({ children }) => {
       registerOnFontAsset,
       unregisterOnPageChange,
       unregisterOnFontAsset,
+      loadAsset,
+      completeAsset,
+      registerOnAssetLoad,
+      unregisterOnAssetLoad,
     };
   }, []);
 

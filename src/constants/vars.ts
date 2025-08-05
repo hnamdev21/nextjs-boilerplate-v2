@@ -7,3 +7,9 @@ export const TransitionDuration = Object.freeze({
   HOVER: 'var(--hover-transition-duration)',
   ACTIVE: 'var(--active-transition-duration)',
 });
+
+export const Container = Object.freeze({
+  PADDING_X: 'var(--container-padding-x)',
+  GRID_GAP: 'var(--grid-gap)',
+  GRID_COLUMNS: 'var(--grid-columns)',
+});

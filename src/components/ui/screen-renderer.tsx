@@ -10,7 +10,7 @@ interface Props {
   mobile?: React.ReactElement;
 }
 
-const ScreenRenderer = ({ desktop, tablet, mobile }: Props): React.ReactNode => {
+const ScreenRenderer: React.FC<Props> = ({ desktop, tablet, mobile }) => {
   const { isMobile, isTablet } = useWindowScreen();
 
   if (isMobile && typeof mobile !== 'undefined') {

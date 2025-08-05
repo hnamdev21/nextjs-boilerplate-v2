@@ -1,12 +1,11 @@
 import { Grid, type GridProps } from '@chakra-ui/react/grid';
-import React from 'react';
+import { RefObject } from 'react';
 
-const AllInOne = ({
-  ref,
-  children,
-  css,
-  ...props
-}: GridProps & { ref?: React.RefObject<HTMLDivElement> }): React.ReactElement => {
+type Props = GridProps & {
+  ref?: RefObject<HTMLDivElement | null>;
+};
+
+const AllInOne: React.FC<Props> = ({ ref, children, css, ...props }) => {
   return (
     <Grid
       ref={ref}

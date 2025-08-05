@@ -7,15 +7,15 @@ import { PropsWithChildren } from 'react';
 
 const MainProviders = ({ children }: PropsWithChildren) => {
   return (
-    <WindowSizeProvider>
-      <PageProvider>
-        <ChakraProvider>
+    <ChakraProvider>
+      <WindowSizeProvider>
+        <PageProvider>
           <CursorProvider>
             <LenisScroller>{children}</LenisScroller>
           </CursorProvider>
-        </ChakraProvider>
-      </PageProvider>
-    </WindowSizeProvider>
+        </PageProvider>
+      </WindowSizeProvider>
+    </ChakraProvider>
   );
 };
 
