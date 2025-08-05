@@ -94,6 +94,9 @@ const config = tseslint.config(
         },
       ],
 
+      '@typescript-eslint/prefer-nullish-coalescing': 'off',
+      '@typescript-eslint/prefer-for-of': 'off',
+
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'import-x/no-unresolved': ['error', { ignore: ['@chakra-ui/react'] }],

@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react/box';
 import Footer from '@modules/Layouts/footer';
 import Header from '@modules/Layouts/header';
 import { PropsWithChildren } from 'react';
@@ -17,7 +17,9 @@ const MainLayout = ({ children }: PropsWithChildren) => {
     >
       <Header />
 
-      <main style={{ flex: 1 }}>{children}</main>
+      <Box as="main" flex={1}>
+        {children}
+      </Box>
 
       <Footer />
     </Box>

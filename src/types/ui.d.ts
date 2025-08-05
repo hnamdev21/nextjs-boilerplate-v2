@@ -13,3 +13,12 @@ type SimpleSize = {
   width: number;
   height: number;
 };
+
+type DomLike =
+  | HTMLElement
+  | HTMLDivElement
+  | HTMLButtonElement
+  | HTMLAnchorElement
+  | HTMLVideoElement
+  | HTMLImageElement
+  | null;

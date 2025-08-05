@@ -1,11 +1,11 @@
-import { usePage } from '@providers/page.provider';
+import { useAsset } from '@providers/asset.provider';
 import Image, { ImageProps } from 'next/image';
 import { useEffect } from 'react';
 
 type Props = ImageProps;
 
 const PreloadImage: React.FC<Props> = ({ ...props }) => {
-  const { loadAsset, completeAsset } = usePage();
+  const { loadAsset, completeAsset } = useAsset();
 
   useEffect(() => {
     loadAsset();

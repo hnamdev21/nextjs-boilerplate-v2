@@ -5,8 +5,8 @@ import type { ReactNode } from 'react';
 import { createContext, use, useCallback, useEffect, useMemo, useRef } from 'react';
 
 type Data = {
-  registerOnMouseMove: (key: string, handler: (position: SimpleVector2) => void) => void;
-  unregisterOnMouseMove: (key: string) => void;
+  subscribe: (key: string, handler: CursorEventHandler) => void;
+  unsubscribe: (key: string) => void;
 };
 
 const Context = createContext<Data | undefined>(undefined);
@@ -18,42 +18,39 @@ type Props = {
 const logger = createLogger('CursorProvider');
 
 export const CursorProvider: React.FC<Props> = ({ children }) => {
-  const handlers = useRef<{ [key: string]: (position: SimpleVector2) => void }>({});
+  const subscribers = useRef<{ [key: string]: CursorEventHandler }>({});
 
   useEffect(() => {
     const listener = (event: MouseEvent) => {
-      Object.values(handlers.current).forEach((handler) => {
-        handler({ x: event.clientX, y: event.clientY });
+      Object.values(subscribers.current).forEach((handler) => {
+        handler.onMove?.({ x: event.clientX, y: event.clientY });
       });
     };
 
     window.addEventListener('mousemove', listener);
 
     return () => {
-      handlers.current = {};
+      subscribers.current = {};
       window.removeEventListener('mousemove', listener);
     };
   }, []);
 
-  const registerOnMouseMove = useCallback(
-    (key: string, handler: (position: SimpleVector2) => void) => {
-      if (!handlers.current[key]) {
-        handlers.current[key] = handler;
-      } else {
-        logger.warn(`Handler already registered for key: ${key}`);
-      }
-    },
-    []
-  );
+  const subscribe = useCallback((key: string, handler: CursorEventHandler) => {
+    if (!subscribers.current[key]) {
+      subscribers.current[key] = handler;
+    } else {
+      logger.warn(`Handler already registered for key: ${key}`);
+    }
+  }, []);
 
-  const unregisterOnMouseMove = useCallback((key: string) => {
-    delete handlers.current[key];
+  const unsubscribe = useCallback((key: string) => {
+    delete subscribers.current[key];
   }, []);
 
   const value: Data = useMemo(() => {
     return {
-      registerOnMouseMove,
-      unregisterOnMouseMove,
+      subscribe,
+      unsubscribe,
     };
   }, []);
 
