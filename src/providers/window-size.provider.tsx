@@ -1,10 +1,12 @@
 'use client';
 
+import { createLogger } from '@utils/logger';
 import type { ReactNode } from 'react';
 import { createContext, use, useCallback, useEffect, useMemo, useRef } from 'react';
 
 type Data = {
-  register: (callback: (size: SimpleSize) => void) => void;
+  registerOnResize: (key: string, handler: (size: SimpleSize) => void) => void;
+  unregisterOnResize: (key: string) => void;
 };
 
 const Context = createContext<Data | undefined>(undefined);
@@ -13,8 +15,10 @@ type Props = {
   children: ReactNode;
 };
 
+const logger = createLogger('WindowSizeProvider');
+
 export const WindowSizeProvider: React.FC<Props> = ({ children }) => {
-  const callbacks = useRef<((size: SimpleSize) => void)[]>([]);
+  const handlers = useRef<{ [key: string]: (size: SimpleSize) => void }>({});
   const debounce = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -24,8 +28,13 @@ export const WindowSizeProvider: React.FC<Props> = ({ children }) => {
       }
 
       debounce.current = setTimeout(() => {
-        callbacks.current.forEach((callback) => {
-          callback({ width: window.innerWidth, height: window.innerHeight });
+        logger.info('window.addEventListener resize', {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+
+        Object.values(handlers.current).forEach((handler) => {
+          handler({ width: window.innerWidth, height: window.innerHeight });
         });
       }, 200);
     };
@@ -37,18 +46,27 @@ export const WindowSizeProvider: React.FC<Props> = ({ children }) => {
         clearTimeout(debounce.current);
       }
 
-      callbacks.current = [];
+      handlers.current = {};
       window.removeEventListener('resize', listener);
     };
   }, []);
 
-  const register = useCallback((callback: (size: SimpleSize) => void) => {
-    callbacks.current.push(callback);
+  const registerOnResize = useCallback((key: string, handler: (size: SimpleSize) => void) => {
+    if (!handlers.current[key]) {
+      handlers.current[key] = handler;
+    } else {
+      logger.warn(`Handler already registered for key: ${key}`);
+    }
+  }, []);
+
+  const unregisterOnResize = useCallback((key: string) => {
+    delete handlers.current[key];
   }, []);
 
   const value: Data = useMemo(() => {
     return {
-      register,
+      registerOnResize,
+      unregisterOnResize,
     };
   }, []);
 
