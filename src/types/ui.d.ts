@@ -15,6 +15,7 @@ type SimpleSize = {
 };
 
 type DomLike =
+  | Element
   | HTMLElement
   | HTMLDivElement
   | HTMLButtonElement

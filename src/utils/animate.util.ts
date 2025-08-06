@@ -9,11 +9,11 @@ export const checkIsInView = (element: DomLike | null): boolean => {
 };
 
 type CalcThresholdParams = {
-  element: DomLike;
+  element: DomLike | null;
   threshold?: number;
 };
 export const calcThreshold = ({ element, threshold }: CalcThresholdParams): number => {
-  if (typeof window === 'undefined') return 0;
+  if (typeof window === 'undefined' || !element) return 0;
 
   let inputThreshold = threshold ?? 0;
 

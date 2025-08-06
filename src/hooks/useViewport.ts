@@ -16,7 +16,7 @@ type Return = {
   visible: Signal<boolean>;
 };
 
-const useIsInViewport = ({ ref, options, onVisible, onHidden }: Props): Return => {
+const useViewport = ({ ref, options, onVisible, onHidden }: Props): Return => {
   const visible = useSignal<boolean>(false);
   const ioRef = useRef<IntersectionObserver | null>(null);
 
@@ -52,4 +52,4 @@ const useIsInViewport = ({ ref, options, onVisible, onHidden }: Props): Return =
   return { visible };
 };
 
-export default useIsInViewport;
+export default useViewport;

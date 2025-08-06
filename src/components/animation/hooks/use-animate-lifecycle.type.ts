@@ -2,6 +2,9 @@ import type { RefObject } from 'react';
 
 export type UseAnimationLifeycleCallbackParams = {
   delay: number;
+  fromVars?: gsap.TweenVars;
+  toVars?: gsap.TweenVars;
+  outVars?: gsap.TweenVars;
 };
 
 export type UseAnimateLifecycleConfig = {

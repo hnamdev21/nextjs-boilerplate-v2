@@ -1,0 +1,75 @@
+.invisible {
+  visibility: hidden;
+}
+
+.animated {
+  will-change: unset !important;
+}
+
+.with-transform {
+  will-change: transform;
+}
+
+.with-opacity {
+  will-change: opacity;
+}
+
+.scale-animation {
+  transform: scale(0);
+  transform-origin: center;
+  will-change: transform;
+}
+.scale-animation.animate-in {
+  transform: scale(1);
+}
+
+.scale-x-animation {
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+.scale-x-animation.animate-in {
+  transform: scaleX(1);
+}
+
+.scale-y-animation {
+  transform: scaleY(0);
+  transform-origin: top;
+  will-change: transform;
+}
+.scale-y-animation.animate-in {
+  transform: scaleY(1);
+}
+
+.fade-animation {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+.fade-animation__from-top {
+  transform: translate(0, -32px);
+}
+.fade-animation__from-bottom {
+  transform: translate(0, 32px);
+}
+.fade-animation__from-left {
+  transform: translate(-32px, 0);
+}
+.fade-animation__from-right {
+  transform: translate(32px, 0);
+}
+.fade-animation.animate-in {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.fade-animation__from-top.animate-out {
+  transform: translate(0, 32px);
+}
+.fade-animation__from-bottom.animate-out {
+  transform: translate(0, -32px);
+}
+.fade-animation__from-left.animate-out {
+  transform: translate(-32px, 0);
+}
+.fade-animation__from-right.animate-out {
+  transform: translate(32px, 0);
+}

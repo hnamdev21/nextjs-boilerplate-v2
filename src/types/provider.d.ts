@@ -18,3 +18,8 @@ type CursorEventHandler = {
 type FrameEventHandler = {
   onFrame?: (delta: number) => void;
 };
+
+type ViewportEventHandler = {
+  onVisible?: () => void;
+  onHidden?: () => void;
+};

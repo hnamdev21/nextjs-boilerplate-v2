@@ -7,6 +7,7 @@ import { CursorProvider } from '@/providers/cursor.provider';
 import { FontProvider } from '@/providers/font.provider';
 import { FrameProvider } from '@/providers/frame.provider';
 import { PageStateProvider } from '@/providers/page-state.provider';
+import { ViewportProvider } from '@/providers/viewport.provider';
 import { WindowSizeProvider } from '@/providers/window-size.provider';
 
 const MainProviders = ({ children }: PropsWithChildren) => {
@@ -18,7 +19,9 @@ const MainProviders = ({ children }: PropsWithChildren) => {
             <PageStateProvider>
               <CursorProvider>
                 <FrameProvider>
-                  <LenisScroller>{children}</LenisScroller>
+                  <ViewportProvider>
+                    <LenisScroller>{children}</LenisScroller>
+                  </ViewportProvider>
                 </FrameProvider>
               </CursorProvider>
             </PageStateProvider>

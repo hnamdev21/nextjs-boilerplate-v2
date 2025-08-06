@@ -24,12 +24,8 @@ const useAnimationLifecycle = ({
 
   const prepareAnimate = useCallback(
     (delay: number) => {
-      gsap.registerPlugin(ScrollTrigger);
-
-      scrollTriggerRef.current?.kill();
-
       const topStart = calcThreshold({
-        element: ref.current as HTMLElement,
+        element: ref.current,
         threshold: config?.threshold ?? 0,
       });
 
@@ -47,11 +43,15 @@ const useAnimationLifecycle = ({
   );
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     const id = generateUUID();
     const key = `animate-${id}`;
 
     subscribe(key, (pageState) => {
       const isInView = checkIsInView(ref.current);
+
+      scrollTriggerRef.current?.kill();
 
       if (pageState === PageState.READY) {
         ref.current?.classList.toggle('invisible', !isInView);
@@ -72,6 +72,7 @@ const useAnimationLifecycle = ({
 
     return () => {
       unsubscribe(key);
+      scrollTriggerRef.current?.kill();
     };
   }, [
     init,
