@@ -6,7 +6,7 @@ import type { Signal } from '@preact/signals-react';
 import { useSignal } from '@preact/signals-react';
 
 type Props = {
-  ref: RefObject<DomLike>;
+  ref: RefObject<DomLike | null>;
   options?: IntersectionObserverInit;
   onVisible?: () => void;
   onHidden?: () => void;

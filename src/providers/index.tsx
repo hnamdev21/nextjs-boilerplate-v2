@@ -5,6 +5,7 @@ import { AssetProvider } from '@/providers/asset.provider';
 import { ChakraProvider } from '@/providers/chakra.provider';
 import { CursorProvider } from '@/providers/cursor.provider';
 import { FontProvider } from '@/providers/font.provider';
+import { FrameProvider } from '@/providers/frame.provider';
 import { PageStateProvider } from '@/providers/page-state.provider';
 import { WindowSizeProvider } from '@/providers/window-size.provider';
 
@@ -16,7 +17,9 @@ const MainProviders = ({ children }: PropsWithChildren) => {
           <FontProvider>
             <PageStateProvider>
               <CursorProvider>
-                <LenisScroller>{children}</LenisScroller>
+                <FrameProvider>
+                  <LenisScroller>{children}</LenisScroller>
+                </FrameProvider>
               </CursorProvider>
             </PageStateProvider>
           </FontProvider>

@@ -44,6 +44,9 @@ export const PageStateProvider: React.FC<Props> = ({ children }) => {
       },
     });
 
+    logger.info({
+      pageState: usePageStateStore.getState().pageState,
+    });
     Object.values(subscribers.current).forEach((handler) => {
       handler(usePageStateStore.getState().pageState);
     });

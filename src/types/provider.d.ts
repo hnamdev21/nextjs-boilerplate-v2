@@ -14,3 +14,7 @@ type FontEventHandler = {
 type CursorEventHandler = {
   onMove?: (position: SimpleVector2) => void;
 };
+
+type FrameEventHandler = {
+  onFrame?: (delta: number) => void;
+};

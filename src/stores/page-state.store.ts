@@ -6,7 +6,7 @@ export enum PageState {
   ENTERING = 'entering',
   EXTERED = 'entered',
   EXITING = 'exiting',
-  EXITXED = 'exited',
+  EXITED = 'exited',
   ERROR = 'error',
 }
 

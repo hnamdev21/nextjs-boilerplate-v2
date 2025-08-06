@@ -20,5 +20,4 @@ type DomLike =
   | HTMLButtonElement
   | HTMLAnchorElement
   | HTMLVideoElement
-  | HTMLImageElement
-  | null;
+  | HTMLImageElement;
