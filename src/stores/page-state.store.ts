@@ -4,7 +4,7 @@ export enum PageState {
   LOADING = 'loading',
   READY = 'ready',
   ENTERING = 'entering',
-  EXTERED = 'entered',
+  ENTERED = 'entered',
   EXITING = 'exiting',
   EXITED = 'exited',
   ERROR = 'error',

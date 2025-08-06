@@ -1,7 +1,6 @@
 'use client';
 
 import type React from 'react';
-import { cloneElement } from 'react';
 
 import useWindowScreen from '@/hooks/useWindowScreen';
 
@@ -15,20 +14,20 @@ const ScreenRenderer: React.FC<Props> = ({ desktop, tablet, mobile }) => {
   const { isMobile, isTablet } = useWindowScreen();
 
   if (isMobile && typeof mobile !== 'undefined') {
-    return cloneElement(mobile, { key: 'mobile' });
+    return mobile;
   }
 
   if (isTablet) {
     if (typeof tablet !== 'undefined') {
-      return cloneElement(tablet, { key: 'tablet' });
+      return tablet;
     }
 
     if (typeof mobile !== 'undefined') {
-      return cloneElement(mobile, { key: 'tablet' });
+      return mobile;
     }
   }
 
-  return cloneElement(desktop, { key: 'desktop' });
+  return desktop;
 };
 
 export default ScreenRenderer;
