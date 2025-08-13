@@ -4,11 +4,11 @@ import type React from 'react';
 
 import useWindowScreen from '@/hooks/useWindowScreen';
 
-interface Props {
+type Props = {
   desktop: React.ReactElement;
   tablet?: React.ReactElement;
   mobile?: React.ReactElement;
-}
+};
 
 const ScreenRenderer: React.FC<Props> = ({ desktop, tablet, mobile }) => {
   const { isMobile, isTablet } = useWindowScreen();

@@ -11,9 +11,9 @@ import {
 
 import { Breakpoints } from '@/constants/breakpoints';
 
-interface Props {
+type Props = {
   children: ReactNode;
-}
+};
 
 const customConfig = defineConfig({
   cssVarsPrefix: 'ck',

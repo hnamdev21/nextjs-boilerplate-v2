@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import type { Locale } from '@/i18n/routing';
 
-export interface BaseMetadata {
+export type BaseMetadata = {
   title?: string;
   description?: string;
   seo?: {
@@ -10,22 +10,22 @@ export interface BaseMetadata {
     siteUrl?: string;
   };
   ogImage?: string;
-}
+};
 
-export interface OverrideMetadata {
+export type OverrideMetadata = {
   title?: string;
   description?: string;
   heading?: string;
   keywords?: string[];
   ogImage?: string;
-}
+};
 
-export interface ExtractMetadataParams {
+export type ExtractMetadataParams = {
   baseMetadata: BaseMetadata;
   overrideMetadata?: OverrideMetadata;
   locale: Locale;
   imageUrl?: string;
-}
+};
 
 export const extractMetadata = (params: ExtractMetadataParams): Metadata => {
   const { baseMetadata, overrideMetadata, locale, imageUrl } = params;

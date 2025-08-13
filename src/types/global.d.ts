@@ -1,7 +1,7 @@
 import type Lenis from 'lenis';
 
 declare global {
-  interface Window {
+  type Window = {
     lenis?: { wrapper?: HTMLElement; content?: HTMLElement; lenis?: Lenis };
-  }
+  };
 }

@@ -4,9 +4,9 @@ import type { Locale } from '@/i18n/routing';
 import HomePage from '@/modules/HomePage';
 import { extractMetadata } from '@/utils/metadata.util';
 
-interface Props {
+type Props = {
   params: Promise<{ locale: Locale }>;
-}
+};
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { locale } = await params;

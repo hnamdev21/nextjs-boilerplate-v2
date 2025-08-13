@@ -62,10 +62,6 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'wp-ive.hontran.dev',
-      },
-      {
-        protocol: 'https',
         hostname: 'test-streams.mux.dev',
       },
       {

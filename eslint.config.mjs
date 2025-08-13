@@ -115,6 +115,8 @@ const config = tseslint.config(
         },
       ],
 
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+
       '@typescript-eslint/prefer-nullish-coalescing': 'off',
       '@typescript-eslint/prefer-for-of': 'off',
 
