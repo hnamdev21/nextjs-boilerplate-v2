@@ -33,7 +33,7 @@ export const createLogger = (key: string) => {
   }
 
   const log = (level: LogLevel, ...args: any[]) => {
-    if (isProd && level === 'debug') return;
+    if (isProd) return;
 
     const [prefix, timeStyle, levelStyle, keyStyle] = formatPrefix(level, key);
     const formattedArgs = formatArgs(args);
