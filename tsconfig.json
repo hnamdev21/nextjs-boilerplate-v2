@@ -32,6 +32,9 @@
       "@/messages/*": ["./src/messages/*"],
       "@/providers/*": ["./src/providers/*"],
       "@/modules/*": ["./src/modules/*"],
+      "@/stores/*": ["./src/stores/*"],
+      "@/contexts/*": ["./src/contexts/*"],
+      "@/dtos/*": ["./src/dtos/*"],
       "@/*": ["./src/*"]
     },
     "strictNullChecks": true

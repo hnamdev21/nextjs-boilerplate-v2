@@ -2,12 +2,12 @@ import type { PropsWithChildren } from 'react';
 
 import LenisScroller from '@/components/animation/lenis';
 import { AssetProvider } from '@/providers/asset.provider';
+import { AuthProvider } from '@/providers/auth.provider';
 import { ChakraProvider } from '@/providers/chakra.provider';
 import { CursorProvider } from '@/providers/cursor.provider';
 import { FontProvider } from '@/providers/font.provider';
 import { FrameProvider } from '@/providers/frame.provider';
 import { PageStateProvider } from '@/providers/page-state.provider';
-import { ViewportProvider } from '@/providers/viewport.provider';
 import { WindowSizeProvider } from '@/providers/window-size.provider';
 
 const MainProviders = ({ children }: PropsWithChildren) => {
@@ -19,9 +19,9 @@ const MainProviders = ({ children }: PropsWithChildren) => {
             <PageStateProvider>
               <CursorProvider>
                 <FrameProvider>
-                  <ViewportProvider>
+                  <AuthProvider>
                     <LenisScroller>{children}</LenisScroller>
-                  </ViewportProvider>
+                  </AuthProvider>
                 </FrameProvider>
               </CursorProvider>
             </PageStateProvider>

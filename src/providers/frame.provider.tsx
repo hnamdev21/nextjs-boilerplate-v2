@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 import { createContext, use, useCallback, useEffect, useMemo, useRef } from 'react';
 
+import usePageStateStore, { PageState } from '@/stores/page-state.store';
 import { createLogger } from '@/utils/logger.util';
 
 type Data = {
@@ -19,9 +20,13 @@ type Props = {
 const logger = createLogger('FrameProvider');
 
 export const FrameProvider: React.FC<Props> = ({ children }) => {
+  const pageState = usePageStateStore((state) => state.pageState);
+
   const subscribers = useRef<{ [key: string]: FrameEventHandler }>({});
 
   useEffect(() => {
+    if (pageState === PageState.LOADING) return;
+
     let lastTime = performance.now();
 
     const listener = (time: number) => {
@@ -39,7 +44,7 @@ export const FrameProvider: React.FC<Props> = ({ children }) => {
       subscribers.current = {};
       cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [pageState]);
 
   const subscribe = useCallback((key: string, handler: FrameEventHandler) => {
     if (!subscribers.current[key]) {
