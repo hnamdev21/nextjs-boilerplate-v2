@@ -8,6 +8,7 @@ import type { StoreApi } from 'zustand';
 import { createStore } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
+import { Router } from '@/constants/router';
 import type { LoginDTO } from '@/dtos/auth.dto';
 import type { User } from '@/types/models/user';
 import { createLogger } from '@/utils/logger.util';
@@ -45,6 +46,26 @@ const initialAuthState: AuthState = {
   user: null,
 };
 
+const authStore = createStore<AuthState & AuthActions>()(
+  persist(
+    (set) => ({
+      ...initialAuthState,
+
+      actions: {
+        setToken: (token: string) => set({ token }),
+        setUser: (user: User) => set({ user }),
+
+        reset: () => set(initialAuthState),
+      },
+    }),
+    {
+      name: 'auth-store',
+      partialize: (state) => ({ token: state.token, user: state.user }),
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);
+
 type AuthData = {
   authStore: StoreApi<AuthState & AuthActions>;
   login: (data: LoginDTO) => Promise<void>;
@@ -62,30 +83,11 @@ const logger = createLogger('AuthProvider');
 export const AuthProvider: React.FC<Props> = ({ children }) => {
   const router = useRouter();
 
-  const authStore = createStore<AuthState & AuthActions>()(
-    persist(
-      (set) => ({
-        ...initialAuthState,
-
-        actions: {
-          setToken: (token: string) => set({ token }),
-          setUser: (user: User) => set({ user }),
-
-          reset: () => set(initialAuthState),
-        },
-      }),
-      {
-        name: 'auth-store',
-        storage: createJSONStorage(() => localStorage),
-      }
-    )
-  );
-
   const value: AuthData = useMemo(() => {
     return {
       authStore,
 
-      login: async (data: LoginDTO, redirect: string = '/') => {
+      login: async (data: LoginDTO, redirect: string = Router.HOME) => {
         logger.info('Login', data);
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -104,7 +106,8 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
       logout: async () => {
         authStore.getState().actions.reset();
-        router.push('/login');
+
+        router.push(Router.LOGIN);
       },
     };
   }, []);

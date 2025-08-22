@@ -13,3 +13,13 @@ export const ContainerSpacing = Object.freeze({
   GRID_GAP: 'var(--grid-gap)',
   GRID_COLUMNS: 'var(--grid-columns)',
 });
+
+export const Colors = Object.freeze({
+  BLACK: 'var(--color-black)',
+  WHITE: 'var(--color-white)',
+
+  SUCCESS: 'var(--color-success)',
+  ERROR: 'var(--color-error)',
+  WARNING: 'var(--color-warning)',
+  INFO: 'var(--color-info)',
+});

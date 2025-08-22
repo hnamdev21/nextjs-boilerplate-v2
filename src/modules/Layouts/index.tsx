@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { Box } from '@chakra-ui/react/box';
 
+import { Toaster } from '@/components/ui/toaster';
 import Footer from '@/modules/Layouts/footer';
 import Header from '@/modules/Layouts/header';
 
@@ -23,6 +24,8 @@ const MainLayout = ({ children }: PropsWithChildren) => {
       </Box>
 
       <Footer />
+
+      <Toaster />
     </Box>
   );
 };
