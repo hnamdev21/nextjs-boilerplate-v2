@@ -1,4 +1,4 @@
-import { isProduction } from '@/constants/client-env';
+import { CLIENT_VARS } from '@/constants/client-only';
 
 type FactoryParams<T> = {
   local: T;
@@ -6,7 +6,7 @@ type FactoryParams<T> = {
 };
 
 export const factory = <T>({ local, prod }: FactoryParams<T>): T => {
-  return isProduction ? prod : local;
+  return CLIENT_VARS.ENVIRONMENT === 'production' ? prod : local;
 };
 
 export const sleep = (ms: number) => {

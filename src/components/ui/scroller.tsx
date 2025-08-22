@@ -1,4 +1,5 @@
-import { Box, BoxProps } from '@chakra-ui/react/box';
+import type { BoxProps } from '@chakra-ui/react/box';
+import { Box } from '@chakra-ui/react/box';
 
 const Scroller = ({ children, ...props }: BoxProps) => {
   return (

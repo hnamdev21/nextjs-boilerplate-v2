@@ -13,7 +13,16 @@ const PreloadImage: React.FC<Props> = ({ ...props }) => {
     loadAsset();
   }, []);
 
-  return <Image sizes="100vw" {...props} onLoad={completeAsset} onError={completeAsset} />;
+  return (
+    <Image
+      sizes="100vw"
+      quality={100}
+      loading="eager"
+      {...props}
+      onLoad={completeAsset}
+      onError={completeAsset}
+    />
+  );
 };
 
 export default PreloadImage;

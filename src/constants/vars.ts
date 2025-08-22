@@ -8,7 +8,7 @@ export const TransitionDuration = Object.freeze({
   ACTIVE: 'var(--active-transition-duration)',
 });
 
-export const Container = Object.freeze({
+export const ContainerSpacing = Object.freeze({
   PADDING_X: 'var(--container-padding-x)',
   GRID_GAP: 'var(--grid-gap)',
   GRID_COLUMNS: 'var(--grid-columns)',

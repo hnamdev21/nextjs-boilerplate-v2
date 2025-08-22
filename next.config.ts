@@ -4,6 +4,7 @@ import createBundleAnalyzerPlugin from '@next/bundle-analyzer';
 import createIntlPlugin from 'next-intl/plugin';
 import withPlugins from 'next-compose-plugins';
 import withSvgr from 'next-plugin-svgr';
+import pwaConfig from './pwa.config';
 
 const isProduction = process.env.NEXT_PUBLIC_APP_ENV === 'production';
 
@@ -13,6 +14,7 @@ const withBundleAnalyzer = createBundleAnalyzerPlugin({
 const withNextIntl = createIntlPlugin();
 const withPwa = withPWAInit({
   dest: 'public',
+  ...pwaConfig,
   disable: !isProduction,
   register: !isProduction,
   workboxOptions: {
