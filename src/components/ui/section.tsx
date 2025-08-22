@@ -2,6 +2,7 @@ import type { RefObject } from 'react';
 import type { BoxProps } from '@chakra-ui/react/box';
 import { Box } from '@chakra-ui/react/box';
 import { Grid } from '@chakra-ui/react/grid';
+
 import { ContainerSpacing } from '@/constants/vars';
 
 type Props = BoxProps & {

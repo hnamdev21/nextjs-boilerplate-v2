@@ -1,9 +1,10 @@
 'use client';
 
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
-import { StatusCode } from '@/enums/http-status';
 import { CLIENT_VARS } from '@/constants/client-only';
+import type { StatusCode } from '@/enums/http-status';
 
 export type ResponseBase<T> = {
   status: StatusCode;
@@ -53,11 +54,7 @@ class HttpClient {
     return response.data as ResponseBase<T>;
   }
 
-  async makeSSE<T, K = never>(
-    url: string,
-    data?: K,
-    config?: AxiosRequestConfig
-  ): Promise<Response> {
+  async makeSSE<K = never>(url: string, data?: K, config?: AxiosRequestConfig): Promise<Response> {
     const fullUrl = `${this.axiosInstance.defaults.baseURL}${url}`;
 
     const headers: Record<string, string> = {
